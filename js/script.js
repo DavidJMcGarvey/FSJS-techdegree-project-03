@@ -8,17 +8,22 @@ Full Stack JavaScript Techdegree Project 3
 // Select and and add focus to first Name text field on load
 $('#name').focus();
 
-// Create text area to be displayed if 'other' option selected
-const $otherInput = $('<input type="text" name="user-title" id="user-title" style="display:block">');
-const $select = $('#title');
-const $otherOption = $('#title option[value="other"]');
-$select.on('change', function(e) {
+// "Job Role" Section --> display text area if 'other' option selected
+$('#title').on('change', function(e) {
   if (e.target.value === 'other') {
-    console.log('nailed it again dave!')
-    $select.append($otherInput);
-    $otherInput.attr('style', 'display=block')
-  };
+    console.log('nailed it again davey!')
+    $('label[for="other-title"]').attr('style', 'display:block');
+    $('#other-title').attr('style', 'display:block');
+  } else {
+    $('label[for="other-title"]').attr('style', 'display:none');
+    $('#other-title').attr('style', 'display:none');
+  }
 });
+
+// "T-Shirt" Section -->
+
+
+
 
 // Author: David J McGarvey
 // Date Created: 2019-08-14
