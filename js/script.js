@@ -9,8 +9,8 @@ Full Stack JavaScript Techdegree Project 3
 $('#name').focus();
 
 // "Job Role" Section --> display text area if 'other' option selected
-$('#title').on('change', function(e) {
-  if (e.target.value === 'other') {
+$('#title').on('change', function() {
+  if (this.value === 'other') {
     console.log('nailed it again davey!')
     $('label[for="other-title"]').attr('style', 'display:block');
     $('#other-title').attr('style', 'display:block');
@@ -21,7 +21,47 @@ $('#title').on('change', function(e) {
 });
 
 // "T-Shirt" Section -->
+// TODO: Make this prettier, maybe use .each()?
 
+$('#color').prepend(
+  $(`<option
+    value="colorless"
+    selected="selected">
+    Please Select a T-Shirt Theme</option>`)
+  );
+$('option[value="cornflowerblue"]').hide();
+$('option[value="darkslategrey"]').hide();
+$('option[value="gold"]').hide();
+$('option[value="tomato"]').hide();
+$('option[value="steelblue"]').hide();
+$('option[value="dimgrey"]').hide();
+
+$('#design').on('change', function() {
+  if (this.value === 'js puns') {
+    $('option[value="cornflowerblue"]').show();
+    $('option[value="darkslategrey"]').show();
+    $('option[value="gold"]').show();
+    $('option[value="tomato"]').hide();
+    $('option[value="steelblue"]').hide();
+    $('option[value="dimgrey"]').hide();
+    console.log('js puns test');
+  } else if (this.value === 'heart js') {
+    $('option[value="tomato"]').show();
+    $('option[value="steelblue"]').show();
+    $('option[value="dimgrey"]').show();
+    $('option[value="cornflowerblue"]').hide();
+    $('option[value="darkslategrey"]').hide();
+    $('option[value="gold"]').hide();
+    console.log('heart js test');
+  } else {
+    $('option[value="cornflowerblue"]').hide();
+    $('option[value="darkslategrey"]').hide();
+    $('option[value="gold"]').hide();
+    $('option[value="tomato"]').hide();
+    $('option[value="steelblue"]').hide();
+    $('option[value="dimgrey"]').hide();
+  }
+});
 
 
 
