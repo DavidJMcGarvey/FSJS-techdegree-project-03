@@ -20,7 +20,7 @@ $('#title').on('change', function() {
   }
 });
 
-// "T-Shirt" Section -->
+// "T-Shirt" Section --> colors only available after theme is selected
 // TODO: Make this prettier, maybe use .each()?
 
 $('#color').prepend(
@@ -63,8 +63,69 @@ $('#design').on('change', function() {
   }
 });
 
+// "Register" Section -->
+// TODO: Clean this s##t up too! Least DRY code ever!
+
+$('input[name="all"]').on('change', function() {
+  if ($(this).is(':checked')) {
+    console.log('checked?');
+    $('input[name="js-frameworks"]').attr('disabled', true);
+    $('input[name="js-libs"]').attr('disabled', true);
+    $('input[name="express"]').attr('disabled', true);
+    $('input[name="node"]').attr('disabled', true);
+    $('input[name="build-tools"]').attr('disabled', true);
+    $('input[name="npm"]').attr('disabled', true);
+  } else {
+    console.log('not checked?');
+    $('input[name="js-frameworks"]').attr('disabled', false);
+    $('input[name="js-libs"]').attr('disabled', false);
+    $('input[name="express"]').attr('disabled', false);
+    $('input[name="node"]').attr('disabled', false);
+    $('input[name="build-tools"]').attr('disabled', false);
+    $('input[name="npm"]').attr('disabled', false);
+  }
+});
+$('input[type="checkbox"]').on('change', function(){
+  if ($(this).attr('name') !== 'all' && $(this).is(':checked')) {
+    console.log('look at you davey!');
+    if ($(this).attr('data-day-and-time') === 'Tuesday 1pm-4pm') {
+      $('input[data-day-and-time="Tuesday 1pm-4pm"]').not(this).attr('disabled', true);
+      $('input[name="all"]').attr('disabled', true);
+    }
+  } else if ($(this).attr('name') !== 'all' && $(this).is(':not(:checked)')) {
+    console.log('whoa davey!');
+    if ($(this).attr('data-day-and-time') === 'Tuesday 1pm-4pm') {
+      $('input[data-day-and-time="Tuesday 1pm-4pm"]').not(this).attr('disabled', false);
+      $('input[name="all"]').attr('disabled', false);
+    }
+  }
+  if ($(this).attr('name') !== 'all' && $(this).is(':checked')) {
+    console.log('look at you davey!');
+    if ($(this).attr('data-day-and-time') === 'Tuesday 9am-12pm') {
+      $('input[data-day-and-time="Tuesday 9am-12pm"]').not(this).attr('disabled', true);
+      $('input[name="all"]').attr('disabled', true);
+    }
+  } else if ($(this).attr('name') !== 'all' && $(this).is(':not(:checked)')) {
+    console.log('whoa davey!');
+    if ($(this).attr('data-day-and-time') === 'Tuesday 9am-12pm') {
+      $('input[data-day-and-time="Tuesday 9am-12pm"]').not(this).attr('disabled', false);
+      $('input[name="all"]').attr('disabled', false);
+    }
+  }
+  if ($(this).attr('name') !== 'all' && $(this).is(':checked')) {
+    console.log('look at you davey!');
+    if ($(this).attr('data-day-and-time').includes('Wednesday')) {
+      $('input[name="all"]').attr('disabled', true);
+    }
+  } else if ($(this).attr('name') !== 'all' && $(this).is(':not(:checked)')) {
+    console.log('whoa davey!');
+    if ($(this).attr('data-day-and-time').includes('Wednesday')) {
+      $('input[name="all"]').attr('disabled', false);
+    }
+  }
+});
 
 
 // Author: David J McGarvey
 // Date Created: 2019-08-14
-// Date Updated: 2019-08-14
+// Date Updated: 2019-08-15
