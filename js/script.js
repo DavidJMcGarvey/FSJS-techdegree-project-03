@@ -21,7 +21,6 @@ $('#title').on('change', function() {
 
 // "T-Shirt" Section --> colors only available after theme is selected
 // TODO: Make this prettier, maybe use .each()?
-
 $('#color').prepend(
   $(`<option
     value="colorless"
@@ -62,7 +61,6 @@ $('#design').on('change', function() {
 
 // "Register" Section --> prevents user from overlapping activities
 // TODO: Clean this s##t up too! Least DRY code ever! AAAHHH!!!
-
 $('input[name="all"]').on('change', function() {
   if ($(this).is(':checked')) {
     $('input[name="js-frameworks"]').attr('disabled', true);
@@ -114,33 +112,58 @@ $('input[type="checkbox"]').on('change', function() {
   }
 });
 
-// "Payment" Section -->
-$('option[value="credit card"]').attr('selected', 'selected');
+// "Payment" Section --> Payment options supply different options or messages
 const $creditCardDiv = $('.credit-card');
 const $payPalDiv = $('.credit-card').next().hide();
 const $bitCoinDiv = $('.credit-card').next().next().hide();
 
+$('option[value="select method"]').attr('disabled', true);
+$('option[value="credit card"]').attr('selected', 'selected');
 
-$('#payment').on('change', function() {
-  if (this.value === 'paypal') {
-    // console.log('Where you been davey? Welcome back!');
+function paymentOption(payment) {
+  if (payment === 'paypal') {
     $creditCardDiv.hide();
     $payPalDiv.show();
     $bitCoinDiv.hide();
-  } else if (this.value === 'bitcoin') {
+  } else if (payment === 'bitcoin') {
     $creditCardDiv.hide();
     $payPalDiv.hide();
     $bitCoinDiv.show();
-  } else  if (this.value === 'credit card') {
+  } else if (payment === 'credit_card') {
     $creditCardDiv.show();
     $payPalDiv.hide();
     $bitCoinDiv.hide();
-  } else {
-    $creditCardDiv.hide();
-    $payPalDiv.hide();
-    $bitCoinDiv.hide();
+  }
+}
+
+$('#payment').on('change', function() {
+  if (this.value === 'paypal') {
+    paymentOption('paypal');
+  } else if (this.value === 'bitcoin') {
+    paymentOption('bitcoin');
+  } else  if (this.value === 'credit card') {
+    paymentOption('credit_card');
   }
 });
+
+// Form Validation
+
+function isValidName(name) {
+  return /^[a-z]+$/i.test(name);
+}
+
+function isValidEmail(email) {
+  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+
+$('button:submit').on('click', function() {
+  if ($('#name').value !== '') {
+    console.log('Dave, you made it!')
+
+  }
+});
+
+
 
 
 // Author: David J McGarvey
