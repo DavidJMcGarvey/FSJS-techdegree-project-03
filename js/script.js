@@ -146,26 +146,83 @@ $('#payment').on('change', function() {
   }
 });
 
-// Form Validation
-
+// Form validation
 function isValidName(name) {
   return /^[a-z]+$/i.test(name);
 }
-
 function isValidEmail(email) {
-  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+  return /^[^@]+@[^@.]+\.[a-z]+$/i.test(email);
+}
+function isValidCC(card) {
+  return /[0-9]{13,16}/.test(card);
+}
+function isValidZip(zip) {
+  return /[0-9]{5}/.test(zip);
+}
+function isValidCVV(cvv) {
+  return /[0-9]{3}/.test(cvv);
 }
 
-$('button:submit').on('click', function() {
-  if ($('#name').value !== '') {
-    console.log('Dave, you made it!')
+// Validation on submit button click
+$('button:submit').on('click', function(e) {
+  const safe = ();
+  // Name validity check
+  const $nameValue = $('#name').val();
+  const $nameField = $('#name')[0];
+  if (isValidName($nameValue)) {
+    $nameField.setCustomValidity("");
+    $('form').submit();
+  } else {
+    e.preventDefault();
+    $nameField.setCustomValidity("Honey.");
+  }
 
+  // Email validity check
+  const $email = $('#mail').val();
+  const email = $('#mail')[0];
+  if (isValidEmail($email)) {
+    email.setCustomValidity("");
+    $('form').submit();
+  } else {
+    e.preventDefault();
+    email.setCustomValidity("Honey, honey.");
+  }
+
+  // Checkbox checked check :)
+  if ($(':checkbox:checked').length !== 0) {
+    $('form').submit();
+  } else {
+    e.preventDefault();
+    $('.activities')[0].setCustomValidity("Honey, honey, honey!");
+  }
+
+  // Payment authentication
+  const $creditValue = $('#cc-num').val();
+  const $creditField = $('#cc-num')[0];
+  const $zipValue = $('#zip').val();
+  const $zipField = $('#zip')[0];
+  const $cvvValue = $('#cvv').val();
+  const $cvvField = $('#cvv')[0];
+
+  if (isValidCC($creditValue)) {
+    $creditField.setCustomValidity("");
+    if (isValidZip($zipValue)) {
+      $zipField.setCustomValidity("");
+      if (isValidCVV($cvvValue)) {
+        $cvvField.setCustomValidity("");
+        $('form').submit();
+      }
+    }
+  } else {
+    e.preventDefault();
+    $creditField.setCustomValidity("You this card ain't real");
+    $zipField.setCustomValidity("Not a zip I know");
+    $cvvField.setCustomValidity("Really not trying are you?");
+    console.log('Welcome to the inside of this check Dave!');
   }
 });
 
-
-
-
 // Author: David J McGarvey
 // Date Created: 2019-08-14
-// Date Updated: 2019-08-15
+// Date Updated: 2019-08-20
+// fin
