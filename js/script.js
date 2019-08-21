@@ -27,6 +27,7 @@ $('#color').prepend(
     selected="selected">
     Please Select a T-Shirt Theme</option>`)
   );
+$('#colors-js-puns').hide();
 $('option[value="cornflowerblue"]').hide();
 $('option[value="darkslategrey"]').hide();
 $('option[value="gold"]').hide();
@@ -36,6 +37,7 @@ $('option[value="dimgrey"]').hide();
 
 $('#design').on('change', function() {
   if (this.value === 'js puns') {
+    $('#colors-js-puns').show();
     $('option[value="cornflowerblue"]').show();
     $('option[value="darkslategrey"]').show();
     $('option[value="gold"]').show();
@@ -43,6 +45,7 @@ $('#design').on('change', function() {
     $('option[value="steelblue"]').hide();
     $('option[value="dimgrey"]').hide();
   } else if (this.value === 'heart js') {
+    $('#colors-js-puns').show();
     $('option[value="tomato"]').show();
     $('option[value="steelblue"]').show();
     $('option[value="dimgrey"]').show();
@@ -50,6 +53,7 @@ $('#design').on('change', function() {
     $('option[value="darkslategrey"]').hide();
     $('option[value="gold"]').hide();
   } else {
+    $('#colors-js-puns').hide();
     $('option[value="cornflowerblue"]').hide();
     $('option[value="darkslategrey"]').hide();
     $('option[value="gold"]').hide();
@@ -147,6 +151,9 @@ $('#payment').on('change', function() {
 });
 
 // Form validation
+const $errorMessage = $("<span class=\"error\">Make sure to fill in all fields corectly, and don\'t forgot to <u>Register for Activites</u></span>").hide();
+$('form').prepend($errorMessage);
+
 function isValidName(name) {
   return /^[a-z]+$/i.test(name);
 }
@@ -165,32 +172,29 @@ function isValidCVV(cvv) {
 
 // Validation on submit button click
 $('button:submit').on('click', function(e) {
-  const safe = ();
   // Name validity check
   const $nameValue = $('#name').val();
   const $nameField = $('#name')[0];
   if (isValidName($nameValue)) {
     $nameField.setCustomValidity("");
-    $('form').submit();
   } else {
     e.preventDefault();
     $nameField.setCustomValidity("Honey.");
   }
 
   // Email validity check
-  const $email = $('#mail').val();
-  const email = $('#mail')[0];
-  if (isValidEmail($email)) {
-    email.setCustomValidity("");
-    $('form').submit();
+  const $emailValue = $('#mail').val();
+  const $emailField = $('#mail')[0];
+  if (isValidEmail($emailValue)) {
+    $emailField.setCustomValidity("");
   } else {
     e.preventDefault();
-    email.setCustomValidity("Honey, honey.");
+    $emailField.setCustomValidity("Honey, honey.");
   }
 
   // Checkbox checked check :)
   if ($(':checkbox:checked').length !== 0) {
-    $('form').submit();
+    $('.activities')[0].setCustomValidity("");
   } else {
     e.preventDefault();
     $('.activities')[0].setCustomValidity("Honey, honey, honey!");
@@ -204,25 +208,41 @@ $('button:submit').on('click', function(e) {
   const $cvvValue = $('#cvv').val();
   const $cvvField = $('#cvv')[0];
 
-  if (isValidCC($creditValue)) {
-    $creditField.setCustomValidity("");
-    if (isValidZip($zipValue)) {
-      $zipField.setCustomValidity("");
-      if (isValidCVV($cvvValue)) {
+  if ($('#payment').val() === 'credit card') {
+    if (isValidCC($creditValue)) {
+      $creditField.setCustomValidity("");
+    } else {
+      e.preventDefault();
+      $creditField.setCustomValidity("Card numbers are between 13-16 characters");
+    } if (isValidZip($zipValue)) {
+        $zipField.setCustomValidity("");
+    } else {
+      e.preventDefault();
+      $zipField.setCustomValidity("Zip codes are 5-digits long");
+    } if (isValidCVV($cvvValue)) {
         $cvvField.setCustomValidity("");
-        $('form').submit();
-      }
+    } else {
+      e.preventDefault();
+      $cvvField.setCustomValidity("CVV is a 3-digits number");
     }
+  } else if ($('#payment').val() === 'paypal') {
+    $creditField.setCustomValidity("");
+    $zipField.setCustomValidity("");
+    $cvvField.setCustomValidity("");
+  } else if ($('#payment').val() === 'bitcoin') {
+    $creditField.setCustomValidity("");
+    $zipField.setCustomValidity("");
+    $cvvField.setCustomValidity("");
+  }
+
+  // Form is submitted if all input is valid, error  appears at top of page otherwise
+  if ($('input:invalid').length === 0) {
+    $('form').submit();
   } else {
-    e.preventDefault();
-    $creditField.setCustomValidity("You this card ain't real");
-    $zipField.setCustomValidity("Not a zip I know");
-    $cvvField.setCustomValidity("Really not trying are you?");
-    console.log('Welcome to the inside of this check Dave!');
+    $errorMessage.show();
   }
 });
 
 // Author: David J McGarvey
 // Date Created: 2019-08-14
 // Date Updated: 2019-08-20
-// fin

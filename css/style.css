@@ -211,3 +211,7 @@ input:focus:valid {
   border-color: green;
   background-color: lightgreen;
 }
+
+.error {
+  color: red;
+}
