@@ -16,10 +16,10 @@ This script takes a webpage built with HTML and CSS and adds interactivity to ai
 - Register - Users cannot choose overlapping activities
 - Payment - Payment selection hides the information about the other payment methods
 - Form Validation - The following fields must be valid for form to submit:
-  1) Name
-  2) Email
-  3) Activities (nothing selected is invalid)
-  4) Credit Card number, Zip, and CVV
+  1. Name
+  2. Email
+  3. Activities (nothing selected is invalid)
+  4. Credit Card number, Zip, and CVV
 - Custom Form Validation messaging helps user know what revision
 - Progressive Enhancement - User  can access form fields even if JavaScript is disabled
 - Custom CSS used for error messaging
@@ -29,17 +29,17 @@ This script takes a webpage built with HTML and CSS and adds interactivity to ai
 
 - T-Shirt "Color" label is hidden unless Theme is selected
 - Conditional Error Message - Upon submit:
-    *If* credit card number is blank, message says "number required"
-    *If* credit card number is filled in but invalid, message says "... between 13-16 characters required"
+    **If** credit card number is blank, message says "number required"
+    **If** credit card number is filled in but invalid, message says "... between 13-16 characters required"
 - Real-Time Error Message - Upon key press:
-    *If* credit card number is too low, message says "too few numbers"
-    *If* credit card number within correct range, message says "just right :)"
-    *If* credit card number is too high, message says "too many numbers"
+    **If** credit card number is too low, message says "too few numbers"
+    **If** credit card number within correct range, message says "just right :)"
+    **If** credit card number is too high, message says "too many numbers"
 
 
 **Note to Reviewer**
 
-First off, thanks for taking the time to review my project!! I am going for **exceeds expectations**. If you're reading this, This project is in the SLACK review stage before submission. Knowing this, here are some things I'd love some guidance on:
+First off, thanks for taking the time to review my project!! I am going for **Exceeds Expectations**. If you're reading this, This project is in the SLACK review stage before submission. Knowing this, here are some things I'd love some guidance on:
 
 - DRY, DRY, DRY! I am aware of how much I repeated myself in the code. This attempt was to get functionality where I want it before a big refactoring challenge.
 
