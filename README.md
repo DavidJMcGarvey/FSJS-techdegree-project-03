@@ -1,11 +1,11 @@
 Full Stack JavaScript Techdegree Project 3
 -----------------------------------------
-##           Interactive Form           ##
+###          Interactive Form          ###
 -----------------------------------------
 
 Welcome to my project where you come for the form, but you stay for the interactivity!
 
-**BASIC FEATURES**
+##BASIC FEATURES##
 
 This script takes a webpage built with HTML and CSS and adds interactivity to aid in the user experience and also verify that the data being submitted is valid. It only takes one piece of bad input to derail a whole project. Here are the key features:
 
@@ -25,7 +25,7 @@ This script takes a webpage built with HTML and CSS and adds interactivity to ai
 - Custom CSS used for error messaging
 - Cross-Browser consistency... thank you very much jQuery :)
 
-**EXTRA FEATURES**
+##EXTRA FEATURES##
 
 - T-Shirt "Color" label is hidden unless Theme is selected
 - Conditional Error Message - Upon submit:
@@ -37,7 +37,7 @@ This script takes a webpage built with HTML and CSS and adds interactivity to ai
     **If** credit card number is too high, message says "too many numbers"
 
 
-**Note to Reviewer**
+##Note to Reviewer##
 
 First off, thanks for taking the time to review my project!! I am going for **Exceeds Expectations**. If you're reading this, This project is in the SLACK review stage before submission. Knowing this, here are some things I'd love some guidance on:
 
