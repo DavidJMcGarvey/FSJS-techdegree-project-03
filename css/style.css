@@ -199,12 +199,12 @@ option {
 }
 
 /* =================================
-  Error Message Styling
+  Custom Error Message Styling
 ==================================== */
 
 input:invalid {
-  border-color: #900;
-  background-color: #FDD;
+  border-color: red;
+  background-color: pink;
 }
 
 input:focus:valid {
@@ -214,4 +214,8 @@ input:focus:valid {
 
 .error {
   color: red;
+}
+
+.real-time {
+  color: green;
 }

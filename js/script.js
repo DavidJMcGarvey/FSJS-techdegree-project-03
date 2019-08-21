@@ -269,13 +269,37 @@ $('button:submit').on('click', function(e) {
     $cvvField.setCustomValidity("");
   }
 
-  // Form is submitted if all input is valid, error  appears at top of page otherwise
+  // Form is submitted if all input is valid, error appears at top otherwise
   if ($('input:invalid').length === 0) {
     $('form').submit();
   } else {
     $errorMsgMain.show();
   }
 });
+
+// Real time error message on credit card number input
+const $realTimeUnder = $('<span class=\"error\"> Too Few Numbers</span>').hide();
+$('label[for="cc-num"]').append($realTimeUnder);
+const $realTimeCorrect = $('<span class=\"real-time\"> Just Right :)</span>').hide();
+$('label[for="cc-num"]').append($realTimeCorrect);
+const $realTimeOver = $('<span class=\"error\"> Too Many Numbers</span>').hide();
+$('label[for="cc-num"]').append($realTimeOver);
+$('#cc-num').on('keydown', function(e) {
+  if ($(this).val().length < 13) {
+    $realTimeUnder.show();
+    $realTimeCorrect.hide();
+    $realTimeOver.hide();
+  } else if ($(this).val().length > 16) {
+    $realTimeUnder.hide();
+    $realTimeCorrect.hide();
+    $realTimeOver.show();
+  } else {
+    $realTimeUnder.hide();
+    $realTimeCorrect.show();
+    $realTimeOver.hide();
+  }
+});
+
 
 // Author: David J McGarvey
 // Date Created: 2019-08-14
