@@ -165,8 +165,11 @@ $('label[for="mail"]').append($errorMsgMail);
 const $errorMsgCheckbox = $("<span class=\"error\"> **Registration required</span>").hide();
 $('.activities').append($errorMsgCheckbox);
 
-const $errorMsgCard = $("<span class=\"error\"> **Credit Card Number required</span>").hide();
-$('label[for="cc-num"]').append($errorMsgCard);
+const $errorMsgCardEmpty = $("<span class=\"error\"> **Credit Card Number required</span>").hide();
+$('label[for="cc-num"]').append($errorMsgCardEmpty);
+
+const $errorMsgCardFilled = $("<span class=\"error\"> **Credit Card Number must be between 13-16 characters long</span>").hide();
+$('label[for="cc-num"]').append($errorMsgCardFilled);
 
 const $errorMsgZip = $("<span class=\"error\"> **Zip required</span>").hide();
 $('label[for="zip"]').append($errorMsgZip);
@@ -197,7 +200,7 @@ $('button:submit').on('click', function(e) {
   const $nameValue = $('#name').val();
   const $nameField = $('#name')[0];
   if (isValidName($nameValue)) {
-    $nameField.isValid();
+    $nameField.setCustomValidity("");
   } else {
     e.preventDefault();
     $errorMsgName.show();
@@ -235,10 +238,14 @@ $('button:submit').on('click', function(e) {
   if ($('#payment').val() === 'credit card') {
     if (isValidCC($creditValue)) {
       $creditField.setCustomValidity("");
+    } else if ($creditValue.length !== 0) {
+      e.preventDefault();
+      $errorMsgCardFilled.show();
+      $creditField.setCustomValidity("Card numbers are between 13-16 characters");
     } else {
       e.preventDefault();
-      $errorMsgCard.show()
-      $creditField.setCustomValidity("Card numbers are between 13-16 characters");
+      $errorMsgCardEmpty.show()
+      $creditField.setCustomValidity("Card number required");
     } if (isValidZip($zipValue)) {
         $zipField.setCustomValidity("");
     } else {
@@ -272,4 +279,4 @@ $('button:submit').on('click', function(e) {
 
 // Author: David J McGarvey
 // Date Created: 2019-08-14
-// Date Updated: 2019-08-20
+// Date Updated: 2019-08-21
