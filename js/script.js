@@ -150,10 +150,31 @@ $('#payment').on('change', function() {
   }
 });
 
-// Form validation
-const $errorMessage = $("<span class=\"error\">Make sure to fill in all fields corectly, and don\'t forgot to <u>Register for Activites</u></span>").hide();
-$('form').prepend($errorMessage);
+// Form validation section
 
+// Eror message creation and placement
+const $errorMsgMain = $("<span class=\"error\">**Make sure to fill in all fields corectly, and don\'t forgot to <u>Register for Activites</u></span>").hide();
+$('form').prepend($errorMsgMain);
+
+const $errorMsgName = $("<span class=\"error\"> **Name required</span>").hide();
+$('label[for="name"]').append($errorMsgName);
+
+const $errorMsgMail = $("<span class=\"error\"> **Email required</span>").hide();
+$('label[for="mail"]').append($errorMsgMail);
+
+const $errorMsgCheckbox = $("<span class=\"error\"> **Registration required</span>").hide();
+$('.activities').append($errorMsgCheckbox);
+
+const $errorMsgCard = $("<span class=\"error\"> **Credit Card Number required</span>").hide();
+$('label[for="cc-num"]').append($errorMsgCard);
+
+const $errorMsgZip = $("<span class=\"error\"> **Zip required</span>").hide();
+$('label[for="zip"]').append($errorMsgZip);
+
+const $errorMsgCVV = $("<span class=\"error\"> **CVV required</span>").hide();
+$('label[for="cvv"]').append($errorMsgCVV);
+
+// Regex check functions
 function isValidName(name) {
   return /^[a-z]+$/i.test(name);
 }
@@ -176,10 +197,11 @@ $('button:submit').on('click', function(e) {
   const $nameValue = $('#name').val();
   const $nameField = $('#name')[0];
   if (isValidName($nameValue)) {
-    $nameField.setCustomValidity("");
+    $nameField.isValid();
   } else {
     e.preventDefault();
-    $nameField.setCustomValidity("Honey.");
+    $errorMsgName.show();
+    $nameField.setCustomValidity("Must enter name");
   }
 
   // Email validity check
@@ -189,7 +211,8 @@ $('button:submit').on('click', function(e) {
     $emailField.setCustomValidity("");
   } else {
     e.preventDefault();
-    $emailField.setCustomValidity("Honey, honey.");
+    $errorMsgMail.show();
+    $emailField.setCustomValidity("Must enter email");
   }
 
   // Checkbox checked check :)
@@ -197,7 +220,8 @@ $('button:submit').on('click', function(e) {
     $('.activities')[0].setCustomValidity("");
   } else {
     e.preventDefault();
-    $('.activities')[0].setCustomValidity("Honey, honey, honey!");
+    $errorMsgCheckbox.show();
+    $('.activities')[0].setCustomValidity("Must check at least one box");
   }
 
   // Payment authentication
@@ -213,16 +237,19 @@ $('button:submit').on('click', function(e) {
       $creditField.setCustomValidity("");
     } else {
       e.preventDefault();
+      $errorMsgCard.show()
       $creditField.setCustomValidity("Card numbers are between 13-16 characters");
     } if (isValidZip($zipValue)) {
         $zipField.setCustomValidity("");
     } else {
       e.preventDefault();
+      $errorMsgZip.show();
       $zipField.setCustomValidity("Zip codes are 5-digits long");
     } if (isValidCVV($cvvValue)) {
         $cvvField.setCustomValidity("");
     } else {
       e.preventDefault();
+      $errorMsgCVV.show();
       $cvvField.setCustomValidity("CVV is a 3-digits number");
     }
   } else if ($('#payment').val() === 'paypal') {
@@ -239,7 +266,7 @@ $('button:submit').on('click', function(e) {
   if ($('input:invalid').length === 0) {
     $('form').submit();
   } else {
-    $errorMessage.show();
+    $errorMsgMain.show();
   }
 });
 
