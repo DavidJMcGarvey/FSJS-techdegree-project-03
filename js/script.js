@@ -60,54 +60,50 @@ $('#design').on('change', function() {
 });
 
 // "Register" Section --> prevents user from overlapping activities
-$('input[name="all"]').on('change', function() {
-  if ($(this).is(':checked')) {
-    $('input[name="js-frameworks"]').attr('disabled', true);
-    $('input[name="js-libs"]').attr('disabled', true);
-    $('input[name="express"]').attr('disabled', true);
-    $('input[name="node"]').attr('disabled', true);
-    $('input[name="build-tools"]').attr('disabled', true);
-    $('input[name="npm"]').attr('disabled', true);
-  } else {
-    $('input[name="js-frameworks"]').attr('disabled', false);
-    $('input[name="js-libs"]').attr('disabled', false);
-    $('input[name="express"]').attr('disabled', false);
-    $('input[name="node"]').attr('disabled', false);
-    $('input[name="build-tools"]').attr('disabled', false);
-    $('input[name="npm"]').attr('disabled', false);
-  }
-});
 $('input[type="checkbox"]').on('change', function() {
-  if ($(this).attr('name') !== 'all' && $(this).is(':checked')) {
+  if ($(this).is(':checked')) {
     if ($(this).attr('data-day-and-time') === 'Tuesday 1pm-4pm') {
       $('input[data-day-and-time="Tuesday 1pm-4pm"]').not(this).attr('disabled', true);
-      $('input[name="all"]').attr('disabled', true);
     }
-  } else if ($(this).attr('name') !== 'all' && $(this).is(':not(:checked)')) {
+  } else if ($(this).is(':not(:checked)')) {
     if ($(this).attr('data-day-and-time') === 'Tuesday 1pm-4pm') {
       $('input[data-day-and-time="Tuesday 1pm-4pm"]').not(this).attr('disabled', false);
-      $('input[name="all"]').attr('disabled', false);
     }
   }
-  if ($(this).attr('name') !== 'all' && $(this).is(':checked')) {
+  if ($(this).is(':checked')) {
     if ($(this).attr('data-day-and-time') === 'Tuesday 9am-12pm') {
       $('input[data-day-and-time="Tuesday 9am-12pm"]').not(this).attr('disabled', true);
-      $('input[name="all"]').attr('disabled', true);
     }
-  } else if ($(this).attr('name') !== 'all' && $(this).is(':not(:checked)')) {
+  } else if ($(this).is(':not(:checked)')) {
     if ($(this).attr('data-day-and-time') === 'Tuesday 9am-12pm') {
       $('input[data-day-and-time="Tuesday 9am-12pm"]').not(this).attr('disabled', false);
-      $('input[name="all"]').attr('disabled', false);
     }
   }
-  if ($(this).attr('name') !== 'all' && $(this).is(':checked')) {
-    if ($(this).attr('data-day-and-time').includes('Wednesday')) {
-      $('input[name="all"]').attr('disabled', true);
-    }
-  } else if ($(this).attr('name') !== 'all' && $(this).is(':not(:checked)')) {
-    if ($(this).attr('data-day-and-time').includes('Wednesday')) {
-      $('input[name="all"]').attr('disabled', false);
-    }
+});
+
+// Price display
+let totalCost = 0;
+let $activityCost = $('<span class="cost-display">Total cost: $' + totalCost + '</span>');
+$('.activities').append($activityCost);
+
+$('input[type="checkbox"]').on('change', function() {
+  if ($(this).is(':checked') && $(this).attr('name') === 'all') {
+    totalCost += 100;
+    $activityCost = $('<span class="cost-display">Total cost: $' + totalCost + '</span>');
+    $('.cost-display').replaceWith($activityCost);
+  } else if ($(this).is(':not(:checked)') && $(this).attr('name') === 'all') {
+    totalCost -= 100;
+    $activityCost = $('<span class="cost-display">Total cost: $' + totalCost + '</span>');
+    $('.cost-display').replaceWith($activityCost);
+  }
+  if ($(this).is(':checked')) {
+    totalCost += 100;
+    $activityCost = $('<span class="cost-display">Total cost: $' + totalCost + '</span>');
+    $('.cost-display').replaceWith($activityCost);
+  } else if ($(this).is(':not(:checked)')) {
+    totalCost -= 100;
+    $activityCost = $('<span class="cost-display">Total cost: $' + totalCost + '</span>');
+    $('.cost-display').replaceWith($activityCost);
   }
 });
 
@@ -145,7 +141,7 @@ $('#payment').on('change', function() {
   }
 });
 
-// Form validation section
+// Form validation section -->
 
 // Eror message creation and placement
 const $errorMsgMain = $("<span class=\"error\">**Make sure to fill in all fields corectly, and don\'t forgot to <u>Register for Activites</u></span>").hide();
@@ -216,7 +212,7 @@ $('button:submit').on('click', function(e) {
   // Checkbox checked check :)
   if ($(':checkbox:checked').length !== 0) {
     $('.activities')[0].setCustomValidity("");
-  } else {
+  } else if ($(':checkbox:checked').length === 0) {
     e.preventDefault();
     $errorMsgCheckbox.show();
     $('.activities')[0].setCustomValidity("Must check at least one box");
@@ -264,8 +260,8 @@ $('button:submit').on('click', function(e) {
     $cvvField.setCustomValidity("");
   }
 
-  // Form is submitted if all input is valid, error appears at top otherwise
-  if ($('input:invalid').length === 0) {
+  // Form is submitted if all input is valid
+  if ($('input:invalid').length === 0 && totalCost !== 0) {
     $('form').submit();
   } else {
     $errorMsgMain.show();
@@ -280,11 +276,11 @@ $('label[for="cc-num"]').append($realTimeCorrect);
 const $realTimeOver = $('<span class=\"error\"> Too Many Numbers</span>').hide();
 $('label[for="cc-num"]').append($realTimeOver);
 $('#cc-num').on('keydown', function(e) {
-  if ($(this).val().length < 13) {
+  if ($(this).val().length < 12) {
     $realTimeUnder.show();
     $realTimeCorrect.hide();
     $realTimeOver.hide();
-  } else if ($(this).val().length > 16) {
+  } else if ($(this).val().length >= 16) {
     $realTimeUnder.hide();
     $realTimeCorrect.hide();
     $realTimeOver.show();
@@ -298,4 +294,4 @@ $('#cc-num').on('keydown', function(e) {
 
 // Author: David J McGarvey
 // Date Created: 2019-08-14
-// Date Updated: 2019-08-21
+// Date Updated: 2019-08-22
