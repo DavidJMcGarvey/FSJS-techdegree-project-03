@@ -9,24 +9,20 @@ Full Stack JavaScript Techdegree Project 3
 $('#name').focus();
 
 // "Job Role" Section --> display text area if 'other' option selected
+const $otherLabel = $('label[for="other-title"]').hide();
+const $otherTitle = $('#other-title').hide();
+
 $('#title').on('change', function() {
   if (this.value === 'other') {
-    $('label[for="other-title"]').attr('style', 'display:block');
-    $('#other-title').attr('style', 'display:block');
+    $otherLabel.show();
+    $otherTitle.show();
   } else {
-    $('label[for="other-title"]').attr('style', 'display:none');
-    $('#other-title').attr('style', 'display:none');
+    $otherLabel.hide();
+    $otherTitle.hide();
   }
 });
 
 // "T-Shirt" Section --> colors only available after theme is selected
-// TODO: Make this prettier, maybe use .each()?
-$('#color').prepend(
-  $(`<option
-    value="colorless"
-    selected="selected">
-    Please Select a T-Shirt Theme</option>`)
-  );
 $('#colors-js-puns').hide();
 $('option[value="cornflowerblue"]').hide();
 $('option[value="darkslategrey"]').hide();
@@ -64,7 +60,6 @@ $('#design').on('change', function() {
 });
 
 // "Register" Section --> prevents user from overlapping activities
-// TODO: Clean this s##t up too! Least DRY code ever! AAAHHH!!!
 $('input[name="all"]').on('change', function() {
   if ($(this).is(':checked')) {
     $('input[name="js-frameworks"]').attr('disabled', true);
