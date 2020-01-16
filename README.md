@@ -1,9 +1,10 @@
-Full Stack JavaScript Techdegree Project 3
 -----------------------------------------
 ###          Interactive Form          ###
 -----------------------------------------
 
 Welcome to my project where you come for the form, but you stay for the interactivity!
+
+*Application Description and Goals:*
 
 **BASIC FEATURES**
 
@@ -36,14 +37,19 @@ This script takes a webpage built with HTML and CSS and adds interactivity to ai
     **If** credit card number within correct range, message says "just right :)"
     **If** credit card number is too high, message says "too many numbers"
 
+*Technologies:*
 
-**Note to Reviewer**
+1. JavaScript
+2. Public API
+3. Fetch Request
+4. Asychronous Programming
 
-First off, thanks for taking the time to review my project!! I am going for **Exceeds Expectations**. Here are things to note as you proceed:
+*Screenshots:*
+![img](https://user-images.githubusercontent.com/42125523/72555958-8484f080-3852-11ea-9809-c8d1b57a87b7.png)
+![img](https://user-images.githubusercontent.com/42125523/72555960-8484f080-3852-11ea-8d19-9112dd85c0f4.png)
+![img](https://user-images.githubusercontent.com/42125523/72555961-8484f080-3852-11ea-84bc-538dafef62e2.png)
+![img](https://user-images.githubusercontent.com/42125523/72555962-851d8700-3852-11ea-9ce3-68d255d60d5d.png)
 
-- My basic format follows along with the project instruction's order but not necessarily best practices. i.e. Should I reformat to have all **const** declarations at the top, etc. or should I keep code in sections corresponding to each instruction? 
-
-- THANKS! YOU ROCK!!!
-
-
-David J McGarvey 2019-08-22
+Author: David J McGarvey  
+Created: 2019-08-22  
+Updated: 2020-01-16  
