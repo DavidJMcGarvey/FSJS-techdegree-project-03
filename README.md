@@ -1,10 +1,10 @@
 -----------------------------------------
-###          Interactive Form          ###
+#          Interactive Form          #
 -----------------------------------------
 
 Welcome to my project where you come for the form, but you stay for the interactivity!
 
-*Application Description and Goals:*
+## Application Description and Goals:
 
 **BASIC FEATURES**
 
@@ -37,14 +37,14 @@ This script takes a webpage built with HTML and CSS and adds interactivity to ai
     **If** credit card number within correct range, message says "just right :)"
     **If** credit card number is too high, message says "too many numbers"
 
-*Technologies:*
+## Technologies:
 
 1. JavaScript
 2. Public API
 3. Fetch Request
 4. Asychronous Programming
 
-*Screenshots:*
+## Screenshots:
 ![img](https://user-images.githubusercontent.com/42125523/72555958-8484f080-3852-11ea-9809-c8d1b57a87b7.png)
 ![img](https://user-images.githubusercontent.com/42125523/72555960-8484f080-3852-11ea-8d19-9112dd85c0f4.png)
 ![img](https://user-images.githubusercontent.com/42125523/72555961-8484f080-3852-11ea-84bc-538dafef62e2.png)
@@ -52,4 +52,4 @@ This script takes a webpage built with HTML and CSS and adds interactivity to ai
 
 Author: David J McGarvey  
 Created: 2019-08-22  
-Updated: 2020-01-16  
+Updated: 2020-01-24
